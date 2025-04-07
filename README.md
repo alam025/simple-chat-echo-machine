@@ -1,73 +1,69 @@
-# Welcome to your Lovable project
 
-## Project info
+# MindSphere: Mental Health Resilience Hub
 
-**URL**: https://lovable.dev/projects/570dce5c-283e-4ece-b4da-cc5e57ad7448
+MindSphere is a mental health application that helps users track their mood, build resilience, and connect with a global community of users.
 
-## How can I edit this code?
+## Project Overview
 
-There are several ways of editing your application.
+This application combines:
+- React frontend for user interface and visualizations
+- Python backend for data analysis and mood detection
 
-**Use Lovable**
+## Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/570dce5c-283e-4ece-b4da-cc5e57ad7448) and start prompting.
+- Mood tracking and visualization
+- Interactive mental health interventions
+- Group mood pulse visualization
+- Confetti celebrations for completed activities
+- Resilience score tracking
 
-Changes made via Lovable will be committed automatically to this repo.
+## Getting Started
 
-**Use your preferred IDE**
+### Prerequisites
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- Node.js and npm (for the React frontend)
+- Python 3.7+ (for the backend analysis)
+- Python packages: json, random, datetime (standard library)
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Running the Application
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+1. **Start the React frontend:**
+```
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+2. **Generate mock data with Python:**
+```
+cd src/python
+python mood_analyzer.py
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+This will generate data files in the `src/data` directory that the frontend will use.
 
-**Use GitHub Codespaces**
+3. **Trigger confetti effects:**
+```
+python confetti_trigger.py
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Python-React Integration
 
-## What technologies are used for this project?
+The Python backend and React frontend communicate through JSON files:
 
-This project is built with:
+1. Python scripts analyze content and generate mood data
+2. Data is saved to JSON files in the `src/data` directory
+3. React frontend reads these files to display visualizations
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## For Python Developers
 
-## How can I deploy this project?
+If you're primarily a Python developer, you can focus on enhancing:
 
-Simply open [Lovable](https://lovable.dev/projects/570dce5c-283e-4ece-b4da-cc5e57ad7448) and click on Share -> Publish.
+- `mood_analyzer.py` - Improve sentiment analysis by adding TextBlob or VADER
+- Create new Python scripts for more advanced analysis
+- Add machine learning models for better mood prediction
 
-## Can I connect a custom domain to my Lovable project?
+## Future Enhancements
 
-Yes it is!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- Real-time sentiment analysis of user input
+- Machine learning for personalized interventions
+- Integration with external mental health resources

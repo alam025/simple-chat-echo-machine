@@ -1,7 +1,8 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import confetti from 'canvas-confetti';
 
 interface MoodOrbProps {
   mood: number;
@@ -9,6 +10,8 @@ interface MoodOrbProps {
 }
 
 const MoodOrb = ({ mood, onClick }: MoodOrbProps) => {
+  const [showConfetti, setShowConfetti] = useState(false);
+
   // Determine mood color based on score (0-1)
   const getMoodColor = (mood: number) => {
     if (mood < 0.3) return 'from-[#ff0077] to-[#ff5555]'; // Negative
@@ -21,6 +24,37 @@ const MoodOrb = ({ mood, onClick }: MoodOrbProps) => {
     if (mood < 0.7) return '😐';
     return '😊';
   };
+
+  // Function to trigger confetti effect
+  const triggerConfetti = () => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6, x: 0.8 }
+    });
+    setShowConfetti(true);
+    setTimeout(() => setShowConfetti(false), 2000);
+  };
+
+  // Check for confetti trigger from Python backend
+  useEffect(() => {
+    // This would typically fetch from an API or data file created by Python
+    // In a real app, you might use polling or websockets
+    const checkForConfetti = async () => {
+      try {
+        // In a real app, you'd fetch from '/api/confetti-status' or similar
+        // For demo, we'll simulate a trigger sometimes
+        if (Math.random() < 0.05) { // 5% chance to trigger
+          triggerConfetti();
+        }
+      } catch (error) {
+        console.error('Error checking confetti status:', error);
+      }
+    };
+
+    const interval = setInterval(checkForConfetti, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <motion.div
@@ -50,7 +84,10 @@ const MoodOrb = ({ mood, onClick }: MoodOrbProps) => {
         scale: 1.1,
         boxShadow: `0 0 20px ${mood < 0.3 ? '#ff0077' : mood < 0.7 ? '#ffaa00' : '#00ffcc'}` 
       }}
-      onClick={onClick}
+      onClick={() => {
+        onClick();
+        if (showConfetti) triggerConfetti();
+      }}
     >
       <span className="text-3xl">{getMoodEmoji(mood)}</span>
       <motion.div 
